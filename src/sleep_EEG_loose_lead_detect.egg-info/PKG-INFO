@@ -1,0 +1,7 @@
+Metadata-Version: 2.1
+Name: sleep_EEG_loose_lead_detect
+Version: 0.0
+Summary: Sleep- EEG potential loose-lead detection
+Author: Nishanth Anandanadarajah
+Author-email: nishyniehs@gmail.com
+License-File: LICENSE
