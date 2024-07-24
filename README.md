@@ -13,10 +13,12 @@ automatically identify large extrinsic artifacts in an EEG trace.
 
 ## Inputs
 
-There are two possible ways provided, to feed the inputs. 
-- Based on GUI, for placing the i/p and o/p directories.
-- using the cmd to provide the i/p and o/p directory.
+There are three possible ways provided, to feed the inputs. 
+- Using the cmd to provide the i/p and o/p directory.
+- Using the script via installing the package/ with directory assignment.
+- Under construction, Based on GUI, for placing the i/p and o/p directories.
 
+pip install sleep_EEG_loose_lead_detect-0.0-py3-none-any.whl
 
 ### Example code
 Under the "test/" folder
@@ -24,9 +26,15 @@ Under the "test/" folder
 python all_in_cmd.py -i /Documents/Data_Sleep/EDF_file_directory/ -o /Documents/output_directory/ -edf /Documents/check_loose_lead/edf_list.txt
 ```
  
-If the users prefers the script to run or more files with more controlability, please check the 
-"script_pip_installed_in_one_outlier_variance_inclusive.py''             
+If the users prefer the script to run or more EEG(.edf) files with more control.
+- Install through the 
+```bash
+cd .../EEG_PSG_loose_lead_test/dist/
+pip install sleep_EEG_loose_lead_detect-0.0-py3-none-any.whl
+```
+- Use the directory assignment.
 
+Then use the "script_pip_installed_in_one_outlier_variance_inclusive.py''.
 
 Let us first refer to the tool-related inputs provided in the "Example code".
 - ***-i /Documents/Data_Sleep/EDF_file_directory/***: This is the  main EEG files (".edf") location 
