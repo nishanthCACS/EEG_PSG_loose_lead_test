@@ -178,9 +178,10 @@ def EEG_sleep_loose_lead(in_name_temp, opt_paramters):
         in_name_temp= in_name_temp+opt_paramters.tag
     # --------------------------------------------------------------------------
     # Assigning prprocess paramter values
-    #  amplitude_thres=500 is default another with 2000 is also checked
+    #   2000 is default 
+    # 500 is checked in the batch_run_server_example_2.py
     # --------------------------------------------------------------------------
-    epoch_length, line_freq, bandpass_freq, normal_only, notch_freq_essential_checker, amplitude_thres = opt_paramters.preprocess_par(amplitude_thres)
+    epoch_length, line_freq, bandpass_freq, normal_only, notch_freq_essential_checker, amplitude_thres = opt_paramters.preprocess_par()
     
     # --------------------------------------------------------------------------
     # developments optional to user
@@ -255,7 +256,7 @@ def EEG_sleep_loose_lead(in_name_temp, opt_paramters):
     # basically the epoches points to the EEG_root_copies location
     # --------------------------------------------------------------------------
     filtered_EEG_MT=True
-    epochs, EEG_root_copy, sleep_stages, epoch_start_idx, epoch_status, q1,q2,q3, notch_filter_skipped = segment_EEG(EEG_root_copy, 
+    epochs, EEG_root_copy, sleep_stages, epoch_start_idx_o, epoch_status, q1,q2,q3, notch_filter_skipped = segment_EEG(EEG_root_copy, 
                                                                                     sleep_stages, 
                                                                                     epoch_length, 
                                                                                     Fs, start_time_idx, 
@@ -353,8 +354,10 @@ def EEG_sleep_loose_lead(in_name_temp, opt_paramters):
         sleep_stages = sleep_stages[good_ids]
 
         epochs = epochs[good_ids]
-        epoch_start_idx = epoch_start_idx[good_ids]
-
+        try:
+            epoch_start_idx = epoch_start_idx_o[good_ids]
+        except:
+            epoch_start_idx =  np.array(epoch_start_idx_o)[good_ids.astype(int)]
     # --------------------------------------------------------------------------
     # saving the preprocessed sleep-stages
     # --------------------------------------------------------------------------
