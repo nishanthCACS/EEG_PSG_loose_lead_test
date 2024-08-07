@@ -34,7 +34,8 @@ pip install sleep_EEG_loose_lead_detect-0.0-py3-none-any.whl
 ```
 - Use the directory assignment.
 
-Then use the "script_pip_installed_in_one_outlier_variance_inclusive.py''.
+Then use the "script_pip_installed_in_one_outlier_variance_inclusive.py'' to run the .edfs files fed one at a time.
+Or use the "batch_run_server_example_2.py'' to run the .edfs files with pool command with timeout handler; recommended for big data.
 
 Let us first refer to the tool-related inputs provided in the "Example code".
 - ***-i /Documents/Data_Sleep/EDF_file_directory/***: This is the  main EEG files (".edf") location 
