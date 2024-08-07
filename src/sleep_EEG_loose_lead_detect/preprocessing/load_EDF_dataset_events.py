@@ -33,15 +33,68 @@ logger.addHandler(c_handler)
 logger.setLevel(logging.INFO)
 logger.propagate = False
 
+''' 
+to get the channels and events information presented in the .edf files
+please use the  functions
+   > get_channel_event_infor
+      -get_root_channels
+      -get_event_infor
+'''
+
+def get_root_channels(in_edf):
+    #----------------------------------------------------------------------------------
+    # Load channel information while loading the edf
+    #----------------------------------------------------------------------------------
+    edf = mne.io.read_raw_edf(in_edf, preload=False, verbose=False, stim_channel=None)
+    
+    return edf.ch_names
+
+
+def get_event_infor(in_edf):
+
+    #----------------------------------------------------------------------------------
+    # Load edf file with event information
+    #----------------------------------------------------------------------------------
+    edf = mne.io.read_raw_edf(in_edf, preload=False, verbose=False, stim_channel=None)
+    _, event_ids = mne.events_from_annotations(edf)
+
+    events_all =[]
+    for e_name in event_ids:
+        events_all.append(str(e_name.lower()))
+    return events_all
+
+def get_channel_event_infor(in_edf):
+
+    #----------------------------------------------------------------------------------
+    # Load edf file with event information
+    #----------------------------------------------------------------------------------
+    edf = mne.io.read_raw_edf(in_edf, preload=False, verbose=False, stim_channel=None)
+    _, event_ids = mne.events_from_annotations(edf)
+
+    events_all =[]
+    try:
+        for e_name in event_ids:
+            events_all.append(str(e_name.lower()))
+    except:
+        logger.warning(in_edf+ " event details issue")
+
+    try:
+        ch_names=edf.ch_names
+    except:
+        logger.warning(in_edf+ " channel names details issue")
+        ch_names=[]
+
+    return ch_names, events_all
+
+
 #----------------------------------------------------------------------------------
-def get_root_channels(ch_names =['F3', 'F4', 'C3', 'C4', 'O1', 'O2']):
+def get_assigned_channels(ch_names =['F3', 'F4', 'C3', 'C4', 'O1', 'O2']):
     '''
     Assign the interstted sleep-relevant channels
+    even after the re-referencing this will be there
     
     '''
-    return \
-        ch_names
-
+    return ch_names
 
 #----------------------------------------------------------------------------------
 def load_root_dataset(in_edf, epoch_sec, micro_volt_scaling=1e6,
@@ -112,14 +165,15 @@ def load_root_dataset(in_edf, epoch_sec, micro_volt_scaling=1e6,
     
 
  
-    ch_names  = get_root_channels()
+    ch_names  = get_assigned_channels()
 
     #----------------------------------------------------------------------------------
     # Get sleep stage annotations
     #----------------------------------------------------------------------------------
-    
-    # These are all possible sleep stage events    
-    # made changes in the n4 stage is especially annotated by the 0, and the unknows are annotated by 0
+
+    # These are all possible sleep stage events from the known data   
+    # made changes in the n4 stage is especially annotated by the 0
+    # and the unknows are annotated by 6
     sleep_stage_event_to_id_mapping = {'sleep stage w': 5,
                                         'sleep stage r': 4, 
                                         'sleep stage 1': 3, 
