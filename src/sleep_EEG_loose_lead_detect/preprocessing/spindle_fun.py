@@ -183,7 +183,6 @@ def spindle_detect_main(in_name_temp, sel_ids, start_time_idx, data, sleep_stage
         select the continious EEG portion (chunk) 
         '''
         chunk_start_exact_time_pos= start_time_idx[start_keys[sel_chk]]
-        # chunk_end_exact_time_pos=start_time_idx[cont_EEG_segments[start_keys[sel_chk]]]
         if cont_EEG_segments[start_keys[sel_chk]]==len(start_time_idx):
             chunk_end_exact_time_pos=int(start_time_idx[-1]+epoch_groups_sample_size)
         else:

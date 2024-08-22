@@ -303,7 +303,8 @@ def EEG_sleep_loose_lead(in_name_temp):
             # used to find the subjects disease based studies etc
             # --------------------------------------------------------------------------
             bad_epochs = markBadEpochs(in_edf, in_bad_events, epoch_sec=epoch_length)
-    
+            if loading_dir_pre.keep_signature_dic['bad_epochs']:
+                np.save(loading_dir_pre.bad_epochs_folder+ in_name_temp + "_bad_epochs",bad_epochs)
         
             # --------------------------------------------------------------------------
             # Segment EEG into 30sec epochs, apply notch & band filters, mark bad epochs and normalization
@@ -312,11 +313,17 @@ def EEG_sleep_loose_lead(in_name_temp):
             
             # --------------------------------------------------------------------------
             # this will force the events with the channels information
+            #   channel_specific_preprocess=True 
+            # if not channel_specific_preprocess just return the epoch status without channel specific information
+            # like nan value, high/lower amplitude etc.
             # --------------------------------------------------------------------------
-    
-            channel_specific_preprocess=True
-            ch_names = ['F3', 'F4', 'C3', 'C4', 'O1', 'O2']
-            
+            channel_specific_preprocess = opt_paramters.channel_specific_preprocess
+            # --------------------------------------------------------------------------
+            # EEG_channels extracted from the load_root_dataset
+            # such that filaly the default channels will be endup in
+            # ch_names = ['F3', 'F4', 'C3', 'C4', 'O1', 'O2']
+            # --------------------------------------------------------------------------
+            ch_names = EEG_channels            
             
             # --------------------------------------------------------------------------
             # in the fuiltertaion process the 

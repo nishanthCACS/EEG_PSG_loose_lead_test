@@ -170,17 +170,21 @@ def taper_eigen_extractor_optim_bandwidth(T,Fs, f_max_interst=0,TW=4,TW_opt_defa
 
     return tapers, eigen, d_f, N
 
-def overlap_window_1sec_fixed_slide_spectrogram_given_freq_res(N,c,tapers,eigen,d_f,Fs, extracted_spectrums_of_tapers=False, f_maximum_inters=30,method='unity',normalisation_full=True):
+def overlap_window_1sec_fixed_slide_spectrogram_given_freq_res(N,c,tapers,eigen,d_f,Fs, extracted_spectrums_of_tapers=False, 
+                                                              method='unity',normalisation_full=True):
     '''
     To create the overlapping window
-    d_f: spectral resolution in (Hz)
-    c: raw time domian signal need to extract the frequency features 
-    f_maximum_inters: 30Hz this is a good choice for sleep data
+        d_f: spectral resolution in (Hz)
+        c: raw time domian signal need to extract the frequency features 
        
     method= 'eigen' 
     method= 'unity'
-    extracted_spectrums_of_tapers: If we want the spectrums as it is from the tapers so we can use deep learning to weight each spectrums 
-    and frequency accordingly
+
+      extracted_spectrums_of_tapers: If we want the spectrums as it is from the tapers so 
+      we can use deep learning to weight each spectrums and frequency accordingly
+   
+    xf: The spectral frequency bins corresponding extracted spectrogram.
+    spectrogram_col: Extracted estimated MT-spectrogram.       
     '''
     xf = np.linspace(0.0, int((Fs/2)/d_f), int((N//2)/d_f))
     spectrogram_col=np.zeros((N//2,int((len(c)-N)/Fs)+1))
@@ -203,7 +207,8 @@ def overlap_window_1sec_fixed_slide_spectrogram_given_freq_res(N,c,tapers,eigen,
 
         else:
             # --------------------------------------------------------------------------
-            # adapted from the library https://pyspectrum.readthedocs.io/en/latest/_modules/spectrum/mtm.html on Feb-10-2022 at 15.22p.m
+            # adapted from the library 
+            # https://pyspectrum.readthedocs.io/en/latest/_modules/spectrum/mtm.html on Feb-10-2022 at 15.22p.m
             # --------------------------------------------------------------------------
             if method == "adapt":
                 Sk = Sk.transpose()
@@ -223,14 +228,17 @@ def overlap_window_1sec_fixed_slide_spectrogram_given_freq_res(N,c,tapers,eigen,
 
 
 
-def build_for_comp_purpose_spectrogram_given_freq_res(N,c,tapers,eigen,d_f,Fs, extracted_spectrums_of_tapers=False, f_maximum_inters=30,method='adapt'):
+def build_for_comp_purpose_spectrogram_given_freq_res(N,c,tapers,eigen,d_f,Fs, extracted_spectrums_of_tapers=False, method='adapt'):
     '''
     To create the overlapping window
-    d_f: spectral resolution in (Hz)
-    c: raw time domian signal need to extract the frequency features 
-    f_maximum_inters: 30Hz this is a good choice for sleep data
+        d_f: spectral resolution in (Hz)
+        c: raw time domian signal need to extract the frequency features 
 
-    extracted_spectrums_of_tapers: If we want the spectrums as it is from the tapers so we can use deep learning to weight each spectrums and frequency accordingly
+    extracted_spectrums_of_tapers: If we want the spectrums as it is from the tapers
+    so we can use deep learning to weight each spectrums and frequency accordingly
+
+    xf: The spectral frequency bins corresponding extracted spectrogram.
+    spectrogram_col: Extracted estimated MT-spectrogram.      
     '''
     xf = np.linspace(0.0, int((Fs/2)/d_f), int((N//2)/d_f))
     spectrogram_col=np.zeros((N//2,int((len(c)-N)/Fs)))

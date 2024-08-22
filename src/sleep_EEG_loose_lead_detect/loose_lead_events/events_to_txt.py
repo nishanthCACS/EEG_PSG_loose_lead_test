@@ -28,11 +28,11 @@ yasa_logger.disabled = True
 
 def preprocess_events_to_txt(prerocess_event_txt_file_name, saving_dir, epoch_status,  preprocess_txt_only_detected_bad=True,comma_sep=False, save_csv=False):
     # --------------------------------------------------------------------------
-    # this function cretaes the events to txt funtcion after preprocessing
+    # this function cretaes the events to txt function after preprocessing
     # 
     #  return the epoch in index start from 1
     # 
-    # preprocess_txt_only_detected_bad: this only sleecte the epoches effected in the events annotation
+    # preprocess_txt_only_detected_bad: this only select the epoches effected in the events annotation
     # --------------------------------------------------------------------------
     
     # --------------------------------------------------------------------------
@@ -47,7 +47,7 @@ def preprocess_events_to_txt(prerocess_event_txt_file_name, saving_dir, epoch_st
             preprocess_events_txt.append([e+1, str(epoch_status[e])])
     
     # --------------------------------------------------------------------------
-    # assign txt fiormat to save as txt file
+    # assign txt format to save as txt file
     # --------------------------------------------------------------------------
     if prerocess_event_txt_file_name.split('.')[-1]!='txt':
         if save_csv and  prerocess_event_txt_file_name.split('.')[-1]!='csv':
@@ -56,7 +56,7 @@ def preprocess_events_to_txt(prerocess_event_txt_file_name, saving_dir, epoch_st
             prerocess_event_txt_file_name = prerocess_event_txt_file_name+'.txt'
 
     # --------------------------------------------------------------------------
-    # whenther txt file in comma seprated format
+    # whether txt file in comma seprated format
     # --------------------------------------------------------------------------
     if comma_sep:
         col_sep=','
@@ -69,7 +69,7 @@ def preprocess_events_to_txt(prerocess_event_txt_file_name, saving_dir, epoch_st
 
 def only_sleep_epoches_events_to_txt(prerocess_event_txt_file_name, saving_dir, epoch_status, comma_sep=False, save_csv=False):
     # --------------------------------------------------------------------------
-    # this function cretaes the events to txt funtcion after preprocessing
+    # this function cretaes the events to txt function
     # 
     #  return the epoch in index start from 1
     # 
@@ -83,7 +83,7 @@ def only_sleep_epoches_events_to_txt(prerocess_event_txt_file_name, saving_dir, 
         preprocess_events_txt.append([e+1, str(epoch_status[e])])
     
     # --------------------------------------------------------------------------
-    # assign txt fiormat to save as txt file
+    # assign txt format to save as txt file
     # --------------------------------------------------------------------------
     if prerocess_event_txt_file_name.split('.')[-1]!='txt':
         if save_csv and  prerocess_event_txt_file_name.split('.')[-1]!='csv':
@@ -92,7 +92,7 @@ def only_sleep_epoches_events_to_txt(prerocess_event_txt_file_name, saving_dir, 
             prerocess_event_txt_file_name = prerocess_event_txt_file_name+'.txt'
     
     # --------------------------------------------------------------------------
-    # whenther txt file in comma seprated format
+    # whether txt file in comma seprated format
     # --------------------------------------------------------------------------
     if comma_sep:
         col_sep=','

@@ -225,7 +225,7 @@ def load_root_dataset(in_edf, epoch_sec, micro_volt_scaling=1e6,
     if flag_other_start_id_extraction:
         logger.warn(in_edf+" Selected events start ids are not continious, seems some breaks may happened in the recording")
         logger.warning('Due to this missalignment due to time stamp missing; the down strean analysis is performed based on assumption of alignment')
-        logger.warning('Assumption:  health check performed by our precheck tool with the EEG and the obtained aligned edf is used for the analysis')
+        logger.warning('Assumption:  health check performed by precheck tool with the EEG and the obtained aligned edf is used for the analysis')
     
         sel_index_sl_st, start_ids = re_intiate_manually_obtain_sel_index_sl_st(whole_annotations,events,ev_or,
                                                                     sleep_stage_event_to_id_mapping,
@@ -329,3 +329,24 @@ def re_intiate_manually_obtain_sel_index_sl_st(whole_annotations,events,ev_or,
           logger.error("Events orgin not match with the selected events, please report with the edf file to track the issue")
     return np.array(sel_index_sl_st_manual),start_id_manual
 
+
+def isEDFAligned(eeg_data_raw, annotations, sampling_freq, epoch_size):
+    '''
+    function credit goes to Dr. Amlan Talukdar
+    This function just help to check the provided annotation aligined with the given edf file
+
+    As from the analysis some times the end criteria may not full-fill (use the function with your own-risk)
+    
+    '''
+    whole_annotations = np.concatenate([annotations.onset[:, None].astype(object),
+                                        annotations.duration[:, None].astype(object),
+                                        annotations.description[:, None].astype(object)], axis=1)
+ 
+    # --------------------------------------------------------------------------
+    # Check if the last annotation time matches the last EEG epoch
+    # --------------------------------------------------------------------------
+    last_annot_time = whole_annotations[-1][0] + whole_annotations[-1][1]
+    last_annot_epoch = int(last_annot_time//epoch_size)
+    last_signal_epoch = int(eeg_data_raw.shape[1]//int(epoch_size * sampling_freq))
+ 
+    return last_annot_epoch == last_signal_epoch

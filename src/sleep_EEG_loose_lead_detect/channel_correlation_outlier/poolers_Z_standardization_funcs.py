@@ -47,8 +47,8 @@ def cross_correltion_dic(ch_names = ['F3', 'F4', 'C3', 'C4', 'O1', 'O2']):
     '''
     cross_correlation_ref_dic={}
     a=0
-    for ch1 in range(0,5): 
-        for ch2 in range(ch1+1,6):
+    for ch1 in range(0,len(ch_names)-1): 
+        for ch2 in range(ch1+1,len(ch_names)):
             cross_correlation_ref_dic[ch_names[ch1]+'-'+ch_names[ch2]]=[[ch1,ch2],a]
             a=a+1
 

@@ -23,7 +23,6 @@ from sleep_EEG_loose_lead_detect.MT_spectrum.Multitaper_class import taper_eigen
 from sleep_EEG_loose_lead_detect.MT_spectrum.Multitaper_class import overlap_window_1sec_fixed_slide_spectrogram_given_freq_res
 from sleep_EEG_loose_lead_detect.GUI_interface.percentage_bar_vis  import percent_complete
 
-# from out_lier_based_fun_vin5 import inter_mediate_mapping_correlation
 '''
 https://numpy.org/doc/stable/reference/generated/numpy.corrcoef.html on Mon Jan 16 09:00:49 2023
 the pearson product-moment correlation coefficients are only calaultaed by numpy
