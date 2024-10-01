@@ -76,7 +76,7 @@ logger.propagate = False
 
 # --------------------------------------------------------------------------
 #this is main function to cover both NREM and REM together
-#  or just one sleep-stage group
+#  or just one sleep-stage group for mean based outlier detection
 # --------------------------------------------------------------------------
 def find_loose_leads_based_mean(correlation_flatten_MT_not_opt, sleep_stages_annot_flatten, 
                      ch_names,cross_correlation_ref_dic,
@@ -104,14 +104,17 @@ def find_loose_leads_based_mean(correlation_flatten_MT_not_opt, sleep_stages_ann
                     loose_lead_channels=[], verbose=False,GUI_percentile=True):
 
     """
+    Main function predicts the outliers based on the mean of correlation
+    function to cover given sleep stage group (both NREM and REM together
+    or just one sleep-stage group)
     
-    inorder to make the life easier this fiunction 
-        will run one sleep-satge combination togetehr in one run this can be called two seperate time to process the NREM and REM seperately
-    this function predicts the outliers based on the mean of correlation
+    Such that this function should be called two seperate time to 
+        process the NREM and REM seperately
     """
 
     # --------------------------------------------------------------------------
-    # while avoiding the flat_MT based on the variance (( alreday presented outlier annotations) 
+    # while avoiding already presented outlier annotations
+    #  for an example this can be the varaince based outlier flat_MT
     # --------------------------------------------------------------------------
     if flat_MT_consider:
         flat_MT_ch =flat_MT

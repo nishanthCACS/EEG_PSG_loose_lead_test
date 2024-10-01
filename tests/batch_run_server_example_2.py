@@ -564,9 +564,12 @@ def EEG_sleep_loose_lead(in_name_temp):
                 flat_MT=[]
     
             # --------------------------------------------------------------------------
-            # this is like using methology based on the distribution 
-            # in this script we are not checking the distribution or moving window
-            #  Here we used moving window based approach
+            # Assigning the Hyper-parameters for the correlation based loose-lead detetion
+
+            # We have the choice to use the distribution or moving window.
+            # Any of these methods need the hyper-parameter assignment, for retrive the detect the  outlier segments
+            #  (possible potential loose-leads segments).
+            #  Here we used moving window based method.
             # --------------------------------------------------------------------------
             tail_check_bin, GMM_based,    factor_check, threh_prob, outlier_basic_con,\
                     moving_window_based, moving_window_size, th_fact,\
@@ -576,7 +579,7 @@ def EEG_sleep_loose_lead(in_name_temp):
                     with_conv,thresh_min_conv,thresh_in_sec,outlier_presene_con_lenth_th, \
                     with_fill_period=opt_paramters.methodology_related_paramaters_for_outlier_detection()
             # --------------------------------------------------------------------------
-            #finalise the loose lead detection the following parameters are just annotate the whole lead as loose-lead based on the conditions
+            #finalise the loose lead detection the following Hyper-parameters are just annotate the whole lead as loose-lead based on the conditions
             # --------------------------------------------------------------------------
             loose_lead_period_min,\
                 percentage_on_given_period_while_sliding,\

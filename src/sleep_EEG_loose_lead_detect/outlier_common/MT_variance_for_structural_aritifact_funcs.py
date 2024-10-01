@@ -17,8 +17,7 @@ from copy import deepcopy
 from sleep_EEG_loose_lead_detect.outlier_common.outlier_based_on_distribution_fucns import outlier_stat_finder
 
 
-
-logger = logging.getLogger("poolers_z")
+logger = logging.getLogger("variance_std_div_threh")
 
 while logger.handlers:
      logger.handlers.pop()
@@ -63,19 +62,23 @@ def find_statistics_for_vertical_spikes(MT_spec_db,outlier_basic_con):
         channel_dic[ch]=deepcopy(check)
     return channel_dic
 
-def find_vertical_spikes(MT_spec_db,MT_spec_raw,std_thres=5,cont_seg_wise=False, return_var=False):
+def find_vertical_spikes(MT_spec_db,MT_spec_raw,std_thres=5,cont_seg_wise=False, return_var=False, centralise_std=False):
     '''
-        std_thres=5#mostly if that below ~8 looks concerns
+        std_thres=5 
+        mostly if that below ~8 looks concerns
     '''
     logger.warning("choose the std threhold wisely we don't gurantee the default value provided will find the spikes")
-    
+    logger.warning("The default value 5 only selected for dB scale MT-spectrum")
+
     #this can be done by just pooling all channels variance and find the outlier
     pooled_variance = np.transpose(MT_spec_db.std(axis=1),(1,0))
 
-    # #here we are not deviding by standard deviation, but subtract the mean to 
-    # # centralise due to noise channel mean value going to be changed
-    # mean = np.mean(pooled_variance,axis=0)
-    # pooled_variance = (pooled_variance-mean)#/standard_dev
+    if centralise_std:
+        #here we are not deviding by standard deviation, but subtract the mean to 
+        # centralise due to noise channel mean value going to be changed
+        mean = np.mean(pooled_variance,axis=0)
+        pooled_variance = (pooled_variance-mean)#/standard_dev
+
     if  cont_seg_wise:
         # flat_MT = np.zeros((len(MT_spec_raw),6))
         flat_MT=np.ones((np.shape(pooled_variance)[0],np.shape(pooled_variance)[1]))

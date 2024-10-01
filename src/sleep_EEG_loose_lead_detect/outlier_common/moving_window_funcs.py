@@ -1060,7 +1060,7 @@ def moving_window_based_out_lier_annotator_channel_mean(corr_check_given,sleep_s
         # --------------------------------------------------------------------------
         #  if not having flat_MT p[revious annpotation only using the continious segments to do the moving window
         # --------------------------------------------------------------------------
-        if not (flat_MT_consider and break_flat_MT_flatten) or (avoid_spindle_loc and break_spindle_flatten):
+        if not ((flat_MT_consider and break_flat_MT_flatten) or (avoid_spindle_loc and break_spindle_flatten)):
             interseted_sleep_stage_cont_groups_start_end_index = deepcopy(interseted_sleep_stage_cont_groups_start_end_index_or)
             len_interseted_sleep_stage_cont_groups = deepcopy(len_interseted_sleep_stage_cont_groups_or)
         # --------------------------------------------------------------------------
