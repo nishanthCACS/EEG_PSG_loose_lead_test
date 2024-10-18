@@ -85,6 +85,7 @@ optional arguments:
 Apart from this we are also providing [Docker](https://hub.docker.com/r/nishyanand/loose_lead_test).
 
 ## save modified EEG file as EDF
-
 Please check the files on EDF modifier project and docker documentation.
 
+## Guideline
+Can be found in "Guide_lines_for_package.pdf"
