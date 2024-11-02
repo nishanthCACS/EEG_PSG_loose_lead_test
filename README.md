@@ -91,8 +91,9 @@ Please check the files on EDF modifier project and docker documentation.
 Can be found in "Guide_lines_for_package.pdf"
 
 ## Citation
-If you find the package useful please cite us o
-n
+If you find the package useful please cite us 
+
+
 N. Anandanadarajah, Amlan Talukder, Deryck Yeung, Yuanyuan Li, David M. Umbach,
 Zheng Fan, Leping Li. “Detection of Movement and Lead-Popping Artifacts in Polysomnogra-
 phy EEG Data,” Signals, vol. 5, no. 4. MDPI AG, pp. 690–704, Oct. 22, 2024. doi: 10.3390/sig-
